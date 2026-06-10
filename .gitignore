@@ -2,3 +2,5 @@ data/auction.json
 server.log
 server.err.log
 *.tmp
+
+auction-site.zip
