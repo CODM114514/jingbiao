@@ -26,6 +26,7 @@ async function adminRequest(path, options = {}) {
     headers: {
       'Content-Type': 'application/json',
       'X-Admin-Password': adminPassword,
+      ...(adminPassword ? { Authorization: `Bearer ${adminPassword}` } : {}),
       ...(options.headers ?? {}),
     },
   });
@@ -75,7 +76,7 @@ async function loadAdmin() {
 
 loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  adminPassword = document.querySelector('#adminPassword').value;
+  adminPassword = document.querySelector('#adminPassword').value.trim();
   try {
     await loadAdmin();
   } catch (error) {

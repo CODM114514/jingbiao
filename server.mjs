@@ -46,7 +46,15 @@ async function readJsonBody(request) {
 }
 
 function isAuthorized(request, adminPassword) {
-  return request.headers['x-admin-password'] === adminPassword;
+  const candidate = (
+    request.headers['x-admin-password']
+    ?? (typeof request.headers.authorization === 'string'
+      ? request.headers.authorization.replace(/^Bearer\s+/i, '')
+      : undefined)
+    ?? ''
+  ).trim();
+
+  return candidate === String(adminPassword).trim();
 }
 
 async function serveStatic(request, response) {
