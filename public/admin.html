@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>竞价后台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="auction-hero">
+        <div>
+          <p class="eyebrow">管理后台</p>
+          <h1>竞价后台</h1>
+          <p class="lede">查看实名记录、调整竞标设置、确认中标人。</p>
+        </div>
+        <form id="loginForm" class="login-panel">
+          <label>
+            管理员密码
+            <input id="adminPassword" type="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">进入后台</button>
+        </form>
+      </section>
+
+      <section id="adminContent" class="admin-grid hidden">
+        <form id="settingsForm" class="panel">
+          <h2>竞标设置</h2>
+          <label>资产名称<input name="title" required /></label>
+          <label>资产说明<textarea name="description" rows="4" required></textarea></label>
+          <label>租期<input name="rentalPeriod" required /></label>
+          <label>起拍价<input name="startingPrice" type="number" min="0" step="1" required /></label>
+          <label>最低加价<input name="minIncrement" type="number" min="0" step="1" required /></label>
+          <label>押金<input name="deposit" type="number" min="0" step="1" required /></label>
+          <label>竞标开始时间<input name="startsAt" type="datetime-local" required /></label>
+          <label>截止时间<input name="endsAt" type="datetime-local" required /></label>
+          <button type="submit">保存设置</button>
+          <p id="settingsMessage" class="message"></p>
+        </form>
+
+        <section class="panel">
+          <h2>中标人</h2>
+          <div id="winnerBox" class="winner-box">暂无出价</div>
+        </section>
+
+        <section class="panel wide">
+          <h2>完整出价记录</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th>完整手机号</th>
+                  <th>出价</th>
+                  <th>时间</th>
+                </tr>
+              </thead>
+              <tbody id="adminBids"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel wide">
+          <h2>参与者</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th>完整手机号</th>
+                  <th>登记时间</th>
+                </tr>
+              </thead>
+              <tbody id="participants"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="/admin.js"></script>
+  </body>
+</html>

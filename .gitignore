@@ -1,0 +1,4 @@
+data/auction.json
+server.log
+server.err.log
+*.tmp

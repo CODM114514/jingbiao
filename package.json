@@ -1,0 +1,11 @@
+{
+  "name": "public-asset-auction",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "start:prod": "node server.mjs",
+    "test": "node --test"
+  }
+}

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: public-asset-auction
+    env: node
+    branch: main
+    buildCommand: npm install
+    startCommand: npm run start
+    healthCheckPath: /api/public
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: ADMIN_PASSWORD
+        value: change-me-in-dashboard

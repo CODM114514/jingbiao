@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>公开租赁竞拍</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="auction-hero">
+        <div>
+          <p class="eyebrow">内部闲置资产竞拍</p>
+          <h1 id="auctionTitle">公开租赁竞拍</h1>
+          <p id="auctionDescription" class="lede">请按页面规则公开递增出价。</p>
+        </div>
+        <div class="price-panel">
+          <span>当前最高价</span>
+          <strong id="currentPrice">--</strong>
+          <small id="winnerHint">暂无出价</small>
+        </div>
+      </section>
+
+      <section class="info-grid">
+        <div>
+          <span>起拍价</span>
+          <strong id="startingPrice">--</strong>
+        </div>
+        <div>
+          <span>加价幅度</span>
+          <strong id="minIncrement">--</strong>
+        </div>
+        <div>
+          <span>保证金</span>
+          <strong id="deposit">--</strong>
+        </div>
+        <div>
+          <span>租期</span>
+          <strong id="rentalPeriod">--</strong>
+        </div>
+        <div>
+          <span>开始时间</span>
+          <strong id="startsAt">--</strong>
+        </div>
+        <div>
+          <span>截止时间</span>
+          <strong id="endsAt">--</strong>
+        </div>
+      </section>
+
+      <section class="phase-strip">
+        <strong id="phaseStatus">页面加载中</strong>
+        <span id="countdown">--</span>
+      </section>
+
+      <section class="workbench">
+        <div class="left-stack">
+          <section id="authPanel" class="panel login-panel">
+            <div class="mode-switch">
+              <button type="button" id="showRegister" class="secondary-button">注册</button>
+              <button type="button" id="showLogin" class="secondary-button active">登录</button>
+            </div>
+
+            <form id="registerForm" class="hidden">
+              <h2>用户注册</h2>
+              <label>
+                姓名
+                <input name="name" autocomplete="name" required />
+              </label>
+              <label>
+                手机号
+                <input name="phone" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+              </label>
+              <label>
+                登录密码
+                <input name="password" type="password" minlength="6" placeholder="至少6位" required />
+              </label>
+              <label>
+                安全问题
+                <input name="securityQuestion" required placeholder="例：妈妈的名字？" />
+              </label>
+              <label>
+                安全答案
+                <input name="securityAnswer" required />
+              </label>
+              <button type="submit">注册并登录</button>
+            </form>
+
+            <form id="loginForm">
+              <h2>用户登录</h2>
+              <label>
+                手机号
+                <input name="phone" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+              </label>
+              <label>
+                登录密码
+                <input name="password" type="password" required />
+              </label>
+              <button type="submit">登录</button>
+              <button type="button" id="forgotPassword" class="secondary-button">忘记密码</button>
+            </form>
+
+            <p id="authMessage" class="message"></p>
+          </section>
+
+          <section id="forgotPasswordPanel" class="panel hidden">
+            <h2>忘记密码</h2>
+            <label>
+              手机号
+              <input id="forgotPhone" inputmode="numeric" maxlength="11" required />
+            </label>
+            <button type="button" id="loadSecurityQuestion" class="secondary-button">读取安全问题</button>
+            <p id="securityQuestionText" class="security-question"></p>
+            <form id="forgotPasswordForm">
+              <label>
+                安全答案
+                <input id="forgotAnswer" required />
+              </label>
+              <label>
+                新密码
+                <input id="forgotNewPassword" type="password" minlength="6" required />
+              </label>
+              <button type="submit">修改密码</button>
+              <button type="button" id="backToLogin" class="secondary-button">返回登录</button>
+            </form>
+            <p id="forgotMessage" class="message"></p>
+          </section>
+
+          <section id="userDashboard" class="panel hidden">
+            <h2>用户后台</h2>
+            <p id="participantSummary" class="identity-line"></p>
+            <div class="dashboard-stats">
+              <div>
+                <span>竞拍状态</span>
+                <strong id="dashboardStatus">--</strong>
+              </div>
+              <div>
+                <span>剩余时间</span>
+                <strong id="dashboardCountdown">--</strong>
+              </div>
+              <div>
+                <span>当前最高价</span>
+                <strong id="dashboardCurrentPrice">--</strong>
+              </div>
+              <div>
+                <span>下一口最少出价</span>
+                <strong id="dashboardNextBid">--</strong>
+              </div>
+            </div>
+            <button id="enterAuction" type="button">进入竞拍程序</button>
+            <button id="logoutButton" type="button" class="secondary-button">退出登录</button>
+            <p id="dashboardMessage" class="message"></p>
+          </section>
+        </div>
+
+        <section id="auctionProgram" class="panel hidden">
+          <h2>竞拍程序</h2>
+          <form id="bidForm" class="bid-row">
+            <label>
+              出价金额
+              <input name="amount" id="amount" type="number" min="0" step="1" required />
+            </label>
+            <button type="submit">出价</button>
+          </form>
+          <p id="bidMessage" class="message"></p>
+
+          <h2 class="subheading">出价历史</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>手机号后4位</th>
+                  <th>出价金额</th>
+                  <th>时间</th>
+                </tr>
+              </thead>
+              <tbody id="bidHistory">
+                <tr><td colspan="3">暂无出价</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="rule">下一次出价必须高于当前最高价；出价后会即时展示到列表中。</p>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
